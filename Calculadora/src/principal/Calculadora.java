@@ -3,7 +3,7 @@ import menu.Menu;
 import operaciones.Operaciones;
 
 public class Calculadora{
-    public static void main(String[] args) {   
+    public static void main(String[] args) {    	
         int resultado = 0;
         String operacion = "";
         int[] operandos = new int [2];
@@ -12,8 +12,23 @@ public class Calculadora{
         Operaciones operaciones = new Operaciones();
         
         do{
+        	
+        	 /*
+             * @author mikelantxus
+        	 * @param operandos
+        	 * @param operacion
+        	 * @return Pide numeros y despues te sale las distintas operaciones
+        	 * 
+        	 */
+        	
             operandos = menu.pedirNumeros();
             operacion = menu.menuOpciones();
+            
+            /*
+             * @author mikelantxus
+        	 * @return Aqui el programa te devuelve el resultado de la operacion dependendiendo de la elección del usuario
+        	 * 
+        	 */
             
             if (operacion.equalsIgnoreCase("+")){
                 resultado = operaciones.sumar(operandos[0], operandos[1]);
@@ -31,6 +46,13 @@ public class Calculadora{
                 resultado = operaciones.resto(operandos[0], operandos[1]);
                 System.out.println ("Resultado: " + resultado);
             } else {
+            	
+            	 /*
+                 * @author mikelantxus
+            	 * @return Cuando el usuario introduce una operacion distinta saldra este mensaje
+            	 * 
+            	 */
+            	
                 System.out.println ("Operación no válida");
             }
         }   while (menu.repetir());
