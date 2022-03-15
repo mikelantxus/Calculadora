@@ -29,7 +29,8 @@ public class Calculadora{
         	 * @return Aqui el programa te devuelve el resultado de la operacion dependendiendo de la elección del usuario
         	 * 
         	 */
-            
+           
+           try {
             if (operacion.equalsIgnoreCase("+")){
                 resultado = operaciones.sumar(operandos[0], operandos[1]);
                 System.out.println ("Resultado: " + resultado);
@@ -52,9 +53,12 @@ public class Calculadora{
             	 * @return Cuando el usuario introduce una operacion distinta saldra este mensaje
             	 * 
             	 */
-            	
-                System.out.println ("Operación no válida");
+           
+            	System.out.println ("Operación no válida");
             }
+        }catch(ArithmeticException a) {
+        	System.out.println ("Operación aritmética no válida");
+         }
         }   while (menu.repetir());
     }
 }
