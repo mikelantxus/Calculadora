@@ -57,7 +57,7 @@ public class Calculadora{
             	System.out.println ("Operación no válida");
             }
         }catch(ArithmeticException a) {
-        	System.out.println ("Operación aritmética no válida");
+        	System.out.println ("Operación aritmética no válida" + a.getMessage());
          }
         }   while (menu.repetir());
     }
