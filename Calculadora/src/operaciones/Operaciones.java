@@ -51,7 +51,7 @@ public class Operaciones{
 	 * 
 	 */
     
-    public int dividir (int valor1, int valor2){
+    public int dividir (int valor1, int valor2 ) {
         int numero;
         numero = valor1 / valor2;
         return numero;

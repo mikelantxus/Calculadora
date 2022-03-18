@@ -1,15 +1,47 @@
 package principal;
+import java.io.IOException;
+import java.util.logging.ConsoleHandler;
+import java.util.logging.FileHandler;
+import java.util.logging.Handler;
+import java.util.logging.Level;
+import java.util.logging.Logger;
+
+import logs.LogConsolaMasFichero;
 import menu.Menu;
 import operaciones.Operaciones;
 
 public class Calculadora{
-    public static void main(String[] args) {    	
+	 private static final Logger LOGGER = Logger.getLogger(Calculadora.class.getName());
+	
+    public static void main(String[] args) {
         int resultado = 0;
         String operacion = "";
         int[] operandos = new int [2];
         
         Menu menu = new Menu();
         Operaciones operaciones = new Operaciones();
+       
+        Handler FileHandler=null;
+        Handler consoleHandler =null;
+        
+        try {
+        consoleHandler = new ConsoleHandler();
+        FileHandler  = new FileHandler("./logs/operaciones.log");
+        
+        }catch(IOException exception) {
+            LOGGER.log(Level.SEVERE, "Nivel de log cambiado a WARNING");
+         }
+        
+        
+        
+        LOGGER.addHandler(consoleHandler);
+        LOGGER.addHandler(FileHandler);
+        
+        consoleHandler.setLevel(Level.WARNING);
+        FileHandler.setLevel(Level.FINE);
+        LOGGER.setLevel(Level.FINE);
+        
+        
         
         do{
         	
@@ -56,8 +88,9 @@ public class Calculadora{
            
             	System.out.println ("Operación no válida");
             }
+            LOGGER.log(Level.FINE, "Operacion: " + operacion + " operando 1 " + operandos[0] + "operando 2 " + operandos[1] + "resultado: " + resultado);
         }catch(ArithmeticException a) {
-        	System.out.println ("Operación aritmética no válida" + a.getMessage());
+        	 LOGGER.log(Level.WARNING, "Division entre cero");
          }
         }   while (menu.repetir());
     }
