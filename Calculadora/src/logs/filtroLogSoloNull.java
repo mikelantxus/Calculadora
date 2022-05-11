@@ -7,12 +7,19 @@ public class filtroLogSoloNull implements Filter {
 
 	@Override
 	public boolean isLoggable(LogRecord record) {
-		boolean guardarLog=false;
+		boolean crearLog=false;
 		
-		if(record.getMessage()!=null && record.getMessage().contains("")) {
-			guardarLog=true;
+		if(record.getMessage()!=null && record.getMessage() != null) {
+			String [] array= record.getMessage().split(" ");
+			String resultado=array[array.length -1];
+			
+			if ("0".equals(resultado)) {
+				crearLog=true;
+			}
+			
+			
 		} 
-		return guardarLog;
+		return crearLog;
 	}
 
 }
