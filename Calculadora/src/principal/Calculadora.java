@@ -8,6 +8,7 @@ import java.util.logging.Level;
 import java.util.logging.LogManager;
 import java.util.logging.Logger;
 
+import logs.filtroLogSoloNull;
 import logs.formatoHTML2;
 import menu.Menu;
 import operaciones.Operaciones;
@@ -24,7 +25,7 @@ public class Calculadora{
 		}
 	
     public static void main(String[] args) {
-    	//configurarLog();
+    	configurarLog();
     	
         int resultado = 0;
         String operacion = "";
@@ -32,20 +33,13 @@ public class Calculadora{
         
         Menu menu = new Menu();
         Operaciones operaciones = new Operaciones();
-        
+       
+        /*
         Handler FileHandler=null;
         Handler consoleHandler =null;
         
                
-        try {
-        consoleHandler = new ConsoleHandler();
-        FileHandler  = new FileHandler("./logs/resultadosNulos.html");
         
-        }catch(IOException exception) {
-            LOGGER.log(Level.SEVERE, "Nivel de log cambiado a WARNING");
-         }
-        
-        FileHandler.setFormatter(new formatoHTML2());
         
         LOGGER.addHandler(consoleHandler);
         LOGGER.addHandler(FileHandler);
@@ -53,7 +47,7 @@ public class Calculadora{
         consoleHandler.setLevel(Level.WARNING);
         FileHandler.setLevel(Level.FINE);
         LOGGER.setLevel(Level.FINE);
-        
+        */
         
         
         do{
@@ -108,30 +102,46 @@ public class Calculadora{
         }   while (menu.repetir());       
     }
 
-    /*
+    
 	private static void configurarLog() {
 
-		LOGGER.setUseParentHandlers(false);
+		//LOGGER.setUseParentHandlers(false);
         
         Handler FileHandler=null;
-        Handler consoleHandler =new ConsoleHandler();
+        //Handler consoleHandler =new ConsoleHandler();
         
-        try {
+        /*try {
         FileHandler  = new FileHandler("./logs/logOperaciones.html");
         
         }catch(IOException exception) {
             LOGGER.log(Level.SEVERE, "Ocurrió un error en fileHandler");
          }
         
-        FileHandler.setFormatter(new formatoHTML());
+        FileHandler.setFormatter(new formatoHTML());*/
         
-        LOGGER.addHandler(FileHandler);
+        try {
+            FileHandler  = new FileHandler("./logs/resultadosNulos.html");
+            
+            }catch(IOException exception) {
+                LOGGER.log(Level.SEVERE, "Nivel de log cambiado a WARNING");
+             }
+            
+            FileHandler.setFormatter(new formatoHTML2());
+        
+        /*LOGGER.addHandler(FileHandler);
         
         consoleHandler.setLevel(Level.WARNING);
         FileHandler.setLevel(Level.FINE);
         FileHandler.setFilter(new filtroLogSoloMultiplicar());
-        LOGGER.setLevel(Level.FINE);
+        LOGGER.setLevel(Level.FINE);*/
+        
+        LOGGER.addHandler(FileHandler);
+        
+        FileHandler.setLevel(Level.FINE);
+        FileHandler.setFilter(new filtroLogSoloNull());
+        //LOGGER.setLevel(Level.FINE);
+        
 		
 	}
-	*/
+	
 }
